@@ -1,13 +1,6 @@
-use Mix.Config
+import Config
 
 # Configure your database
-config :i_am_free, IAmFree.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "i_am_free_dev",
-  hostname: "localhost",
-  show_sensitive_data_on_connection_error: true,
-  pool_size: 10
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
@@ -55,3 +48,26 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
+
+import Config
+
+config :i_am_free, IAmFreeWeb.Endpoint,
+  http: [port: 4000],
+  debug_errors: true,
+  code_reloader: true,
+  check_origin: false,
+  watchers: []
+
+config :logger, :console,
+  format: "$time $metadata[$level] $message\n",
+  metadata: [:request_id]
+
+config :phoenix, :stacktrace_depth, 20
+
+config :i_am_free, IAmFree.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: System.get_env("POSTGRES_USER"),
+  password: System.get_env("POSTGRES_PASSWORD"),
+  database: System.get_env("POSTGRES_DB"),
+  hostname: "db",
+  pool_size: 10
