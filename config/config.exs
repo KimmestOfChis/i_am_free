@@ -5,7 +5,7 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :i_am_free,
   ecto_repos: [IAmFree.Repo],
@@ -29,4 +29,12 @@ config :phoenix, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
-import_config "#{Mix.env()}.exs"
+
+config :i_am_free, IAmFree.Repo,
+  url: System.get_env("DATABASE_URL"),
+  username: System.get_env("POSTGRES_USER"),
+  password: System.get_env("POSTGRES_PASSWORD"),
+  database: System.get_env("POSTGRES_DB"),
+  hostname: "db",
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10

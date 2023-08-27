@@ -31,12 +31,12 @@ defmodule IAmFreeWeb.ConnCase do
     end
   end
 
-  setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(IAmFree.Repo)
+  setup _tags do
+    # :ok = Ecto.Adapters.SQL.Sandbox.checkout(IAmFree.Repo)
 
-    unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(IAmFree.Repo, {:shared, self()})
-    end
+    # unless tags[:async] do
+      # Ecto.Adapters.SQL.Sandbox.mode(IAmFree.Repo, {:shared, self()})
+    # end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
